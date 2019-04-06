@@ -5,14 +5,18 @@
  */
 package controlador;
 
+import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import modelo.Ahorcado;
 
 /**
@@ -20,8 +24,9 @@ import modelo.Ahorcado;
  * @author Francisco de Asís Domínguez Iceta <toteskuu@gmail.com>
  */
 public class FXMLDocumentController implements Initializable {
-    
-    private Label label;
+
+    @FXML
+    private Canvas cvAhorcado;
     @FXML
     private TextField txtTablero;
     @FXML
@@ -30,17 +35,33 @@ public class FXMLDocumentController implements Initializable {
     private Button btnApostar;
     @FXML
     private Label lblErrores;
-    Ahorcado ahorcado;
+    private Ahorcado ahorcado;
+    private GraphicsContext gc;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtTablero.setEditable(false);
         ahorcado = new Ahorcado();
-        btnApostar.setOnMouseClicked(event -> apostar(event));
+        btnApostar.setOnAction(event -> apostar(event));
+        txtApostar.setOnAction(event -> apostar(event));
         txtTablero.setText(String.copyValueOf(ahorcado.getTablero()));
-    }    
-    public void apostar(MouseEvent event){
-        ahorcado.setIntento(txtApostar.getText().charAt(0));
-        ahorcado.comprobarAcierto();
-        ahorcado.actualizarTablero();
+        txtTablero.setFocusTraversable(false);
+        txtApostar.setFocusTraversable(true);
+        txtApostar.requestFocus();
+        gc = cvAhorcado.getGraphicsContext2D();
+        gc.setLineWidth(5);
+        gc.setStroke(Paint.valueOf("Brown"));
+        gc.strokeLine(8, 10, 38, 10);
+    }
+
+    public void apostar(ActionEvent event) {
+        char intento = txtApostar.getText().charAt(0);
+        txtTablero.setText(String.valueOf(ahorcado.apostar(intento)));
+        if (!ahorcado.isPartidaActiva()) {
+            ahorcado = new Ahorcado();
+            txtTablero.setText(String.valueOf(ahorcado.getTablero()));
+        }
+
+        txtApostar.setText(null);
     }
 }

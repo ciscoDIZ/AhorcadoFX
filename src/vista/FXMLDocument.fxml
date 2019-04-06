@@ -6,9 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="571.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="controlador.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
    <children>
-      <Canvas height="253.0" layoutX="50.0" layoutY="118.0" width="222.0" />
+      <Canvas fx:id="cvAhorcado" height="253.0" layoutX="50.0" layoutY="118.0" width="222.0" />
       <TextField fx:id="txtTablero" layoutX="50.0" layoutY="55.0" prefHeight="26.0" prefWidth="477.0" />
       <TextField fx:id="txtApostar" layoutX="316.0" layoutY="262.0" prefHeight="26.0" prefWidth="65.0" />
       <Button fx:id="btnApostar" layoutX="405.0" layoutY="262.0" mnemonicParsing="false" text="Apostar" />

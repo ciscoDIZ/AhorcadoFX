@@ -10,5 +10,5 @@ package modelo;
  * @author Francisco de Asís Domínguez Iceta <toteskuu@gmail.com>
  */
 public class Tablero {
-    
+    private  String[] palabras= {"flor", "otorrino", "alpaca", "alquitranado","esternocleidomastoideo"};
 }
