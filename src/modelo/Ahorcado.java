@@ -18,6 +18,7 @@ public class Ahorcado {
     private String[] palabras = {"flor", "otorrino", "alpaca", "alquitranado", "esternocleidomastoideo"};
     private char[] tablero;
     private char intento;
+    private String erroresString;
     private HashSet<Character> errores;
     private final int ERRORES_POSIBLES;
     private boolean partidaActiva;
@@ -30,6 +31,8 @@ public class Ahorcado {
 
         }
         ERRORES_POSIBLES = 7;
+        erroresString="";
+        errores = new HashSet<>();
     }
 
     public Ahorcado(String jugador, String[] palabras, int erroresPosibles) {
@@ -81,6 +84,13 @@ public class Ahorcado {
         intento = c;
         actualizarTablero();
         partidaActiva = !(comprobarVictoria());
+        if(!comprobarAcierto()){
+            erroresString += c;
+            errores.add(c);
+            if(ERRORES_POSIBLES == erroresString.length()){
+                partidaActiva = false;
+            }
+        }
         return tablero;
     }
     
@@ -125,8 +135,24 @@ public class Ahorcado {
         return intento;
     }
 
-    public HashSet<Character> getErrores() {
-        return errores;
+    public String getPALABRA_SECRETA(){
+        return PALABRA_SECRETA;
+    }
+
+    public String getErroresString() {
+        return erroresString;
+    }
+
+    public void setErroresString(String erroresString) {
+        this.erroresString = erroresString;
+    }
+    
+    public String getErrores() {
+        String resultado="";
+        for (char palabra : errores) {
+            resultado += palabra;
+        }
+        return resultado;
     }
 
     public void setErrores(char errores) {
