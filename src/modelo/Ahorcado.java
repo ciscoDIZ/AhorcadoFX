@@ -15,7 +15,9 @@ public class Ahorcado {
 
     private String jugador;
     private final String PALABRA_SECRETA;
-    private String[] palabras = {"flor", "otorrino", "alpaca", "alquitranado", "esternocleidomastoideo"};
+    private String[] palabras = {"flor", "otorrino", "alpaca", "alquitranado"
+            , "esternocleidomastoideo","array","objeto","clase","instancia","referencia"
+            , "anidamiento", };
     private char[] tablero;
     private char intento;
     private String erroresString;

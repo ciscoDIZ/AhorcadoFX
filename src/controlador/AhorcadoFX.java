@@ -5,10 +5,13 @@
  */
 package controlador;
 
+import java.io.InputStream;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -16,15 +19,28 @@ import javafx.stage.Stage;
  * @author Francisco de Asís Domínguez Iceta <toteskuu@gmail.com>
  */
 public class AhorcadoFX extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/vista/FXMLDocument.fxml"));
-        
-        Scene scene = new Scene(root);
+        if (configurar(stage)) {
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/FXMLDocument.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+    }
+
+    public boolean configurar(Stage stage) {
+        boolean resultado = true;
         stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        stage.setTitle("Juego del ahorcado");
+        ObservableList<Image> observableList = stage.getIcons();
+        InputStream inputStream = AhorcadoFX
+                .class.getResourceAsStream("/img/horca.png");
+        Image image = new Image(inputStream);
+        observableList.add(image);
+        return resultado;
     }
 
     /**
@@ -33,5 +49,5 @@ public class AhorcadoFX extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

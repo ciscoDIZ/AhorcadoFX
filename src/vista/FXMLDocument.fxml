@@ -5,18 +5,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="571.0" stylesheets="@estilo.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.FXMLDocumentController">
    <children>
       <Canvas id="cvAhorcado" fx:id="cvAhorcado" height="253.0" layoutX="50.0" layoutY="118.0" width="222.0" />
-      <TextField fx:id="txtTablero" layoutX="50.0" layoutY="55.0" prefHeight="26.0" prefWidth="477.0" />
+      <TextField fx:id="txtTablero" layoutX="47.0" layoutY="41.0" prefHeight="26.0" prefWidth="477.0">
+         <font>
+            <Font name="Noto Sans Mono CJK TC Bold" size="20.0" />
+         </font></TextField>
       <TextField fx:id="txtApostar" layoutX="316.0" layoutY="262.0" prefHeight="26.0" prefWidth="65.0" />
       <Button fx:id="btnApostar" layoutX="405.0" layoutY="262.0" mnemonicParsing="false" text="Apostar" />
       <Label layoutX="316.0" layoutY="239.0" prefHeight="16.0" prefWidth="150.0" text="Apostar letra:" />
-      <Label fx:id="lblErrores" alignment="TOP_LEFT" layoutX="316.0" layoutY="135.0" prefHeight="26.0" prefWidth="200.0" />
-      <Label fx:id="lblOportunidades" layoutX="157.0" layoutY="372.0" prefHeight="41.0" prefWidth="105.0" />
+      <Label fx:id="lblErrores" alignment="TOP_LEFT" layoutX="316.0" layoutY="135.0" prefHeight="26.0" prefWidth="200.0" textFill="#e82d2d">
+         <font>
+            <Font name="Ubuntu Bold" size="32.0" />
+         </font></Label>
+      <Label id="oportunidades" fx:id="lblOportunidades" layoutX="157.0" layoutY="372.0" prefHeight="41.0" prefWidth="105.0" textFill="#83d069">
+         <font>
+            <Font name="SansSerif Bold" size="19.0" />
+         </font></Label>
       <Label layoutX="316.0" layoutY="110.0" text="Errores:" />
       <Label layoutX="56.0" layoutY="384.0" text="Oportunidades:" />
-      <Label layoutX="161.0" layoutY="385.0" />
    </children>
 </AnchorPane>

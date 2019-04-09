@@ -73,9 +73,9 @@ public class FXMLDocumentController implements Initializable {
         
         if (!ahorcado.isPartidaActiva()) {
             if (ahorcado.comprobarVictoria()) {
-                crearDialogoVictoria().showAndWait();
+                crearDialogo("Has ganado!!").showAndWait();
             } else {
-                crearDialogoDerrota().showAndWait();
+                crearDialogo("Has perdido!!").showAndWait();
             }
             btnApostar.setText("Reset");
             btnApostar.setOnAction(evt -> resetPartida(evt));
@@ -83,24 +83,13 @@ public class FXMLDocumentController implements Initializable {
         txtApostar.setText(null);
     }
 
-    private Dialog crearDialogoVictoria() {
+    private Dialog crearDialogo(String mensaje) {
         Label label = new Label();
-        label.setText("Errores:\n" + ahorcado.getErrores());
+        String palabraSecreta =((ahorcado.comprobarVictoria()))?"":"\nPalabra secreta: "+ahorcado.getPALABRA_SECRETA();
+        label.setText("Errores:\n" 
+                + ahorcado.getErrores()+palabraSecreta);
         Dialog d = new Dialog();
-        d.setTitle("Has ganado!!");
-        d.setHeaderText("¿Deseas jugar otra partida?");
-        d.getDialogPane()
-                .getButtonTypes()
-                .addAll(ButtonType.YES, ButtonType.NO);
-        d.getDialogPane().setContent(label);
-        return d;
-    }
-
-    private Dialog crearDialogoDerrota() {
-        Label label = new Label();
-        label.setText("Errores:\n" + ahorcado.getErrores() + "\nPalabra secreta: " + ahorcado.getPALABRA_SECRETA());
-        Dialog d = new Dialog();
-        d.setTitle("Has perdido!!");
+        d.setTitle(mensaje);
         d.setHeaderText("¿Deseas jugar otra partida?");
         d.getDialogPane()
                 .getButtonTypes()
@@ -124,15 +113,13 @@ public class FXMLDocumentController implements Initializable {
         gcHorca.strokeLine(20, 199, 20, 35);
         gcHorca.strokeLine(20, 34, 76, 34);
         gcHorca.strokeLine(21, 60, 45, 35);
-
-        
-
     }
 
     private void dibujerMonigote() {
-        gcMonigote.setStroke(Paint.valueOf("Blue"));
         int opt = ahorcado.getERRORES_POSIBLES() - ahorcado.getErroresString().length();
         if (opt == 0) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Red"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
             gcMonigote.strokeLine(75, 130, 75, 90);
@@ -142,6 +129,8 @@ public class FXMLDocumentController implements Initializable {
             gcMonigote.setStroke(Paint.valueOf("Black"));
             gcMonigote.strokeLine(74, 34, 74, 65);
         } else if (opt == 1) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
             gcMonigote.strokeLine(75, 130, 75, 90);
@@ -149,33 +138,46 @@ public class FXMLDocumentController implements Initializable {
             gcMonigote.strokeLine(75, 100, 60, 110);
             gcMonigote.strokeOval(65, 70, 20, 20);
         } else if (opt == 2) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
             gcMonigote.strokeLine(75, 130, 75, 90);
             gcMonigote.strokeLine(75, 100, 90, 110);
             gcMonigote.strokeLine(75, 100, 60, 110);
         } else if (opt == 3) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
             gcMonigote.strokeLine(75, 130, 75, 90);
             gcMonigote.strokeLine(75, 100, 90, 110);
         } else if (opt == 4) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
             gcMonigote.strokeLine(75, 130, 75, 90);
         } else if (opt == 5) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
             gcMonigote.strokeLine(90, 160, 75, 130);
         } else if (opt == 6) {
+            resetCanvas();
+            gcMonigote.setStroke(Paint.valueOf("Blue"));
             gcMonigote.strokeLine(60, 160, 75, 130);
         }else if(opt == 7){
-            gcMonigote.clearRect(0, 0, cvAhorcado.getWidth(), cvAhorcado.getHeight());
-            gcMonigote.setStroke(Paint.valueOf("Black"));
-            dibujarHorca();
-            
+            resetCanvas();
         }
     }
 
+    private void resetCanvas(){
+        gcMonigote.clearRect(0, 0, cvAhorcado.getWidth(), cvAhorcado.getHeight());
+            gcMonigote.setStroke(Paint.valueOf("Black"));
+            dibujarHorca();
+    }
+    
     private void actualizarOportunidades() {
         lblOportunidades
                 .setText(String.valueOf(ahorcado.getERRORES_POSIBLES()
