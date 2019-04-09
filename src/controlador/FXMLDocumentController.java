@@ -85,17 +85,18 @@ public class FXMLDocumentController implements Initializable {
 
     private Dialog crearDialogo(String mensaje) {
         Label label = new Label();
-        String palabraSecreta =((ahorcado.comprobarVictoria()))?"":"\nPalabra secreta: "+ahorcado.getPALABRA_SECRETA();
+        String palabraSecreta = ((ahorcado.comprobarVictoria()))
+                ? "" : "\nPalabra secreta: "+ahorcado.getPALABRA_SECRETA();
         label.setText("Errores:\n" 
                 + ahorcado.getErrores()+palabraSecreta);
-        Dialog d = new Dialog();
-        d.setTitle(mensaje);
-        d.setHeaderText("¿Deseas jugar otra partida?");
-        d.getDialogPane()
+        Dialog dialog = new Dialog();
+        dialog.setTitle(mensaje);
+        dialog.setHeaderText("¿Deseas jugar otra partida?");
+        dialog.getDialogPane()
                 .getButtonTypes()
                 .addAll(ButtonType.YES, ButtonType.NO);
-        d.getDialogPane().setContent(label);
-        return d;
+        dialog.getDialogPane().setContent(label);
+        return dialog;
     }
 
     private void resetPartida(ActionEvent evt) {
@@ -104,6 +105,7 @@ public class FXMLDocumentController implements Initializable {
         lblErrores.setText(null);
         btnApostar.setText("Apostar");
         btnApostar.setOnAction(event -> apostar(event));
+        txtApostar.requestFocus();
         actualizarOportunidades();
         dibujerMonigote();
     }
